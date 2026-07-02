@@ -23,7 +23,7 @@
 
 ## Description
 
-This repository now contains a production-oriented NestJS backend for an LMS system with PostgreSQL-backed TypeORM entities, JWT-based authentication, Google OAuth scaffolding, role-based access control, test and assignment flows, theorem search, and notification handling.
+This repository now contains a production-oriented NestJS backend for an LMS system with PostgreSQL-backed TypeORM entities, cookie-based session authentication, Google OAuth scaffolding, role-based access control, test and assignment flows, theorem search, and notification handling.
 
 ## Project setup
 

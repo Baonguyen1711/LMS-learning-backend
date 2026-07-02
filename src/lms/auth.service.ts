@@ -25,8 +25,9 @@ export class AuthService {
       user = await this.userRepository.save(user);
     }
 
-    const token = this.jwtService.sign({ sub: user.id, email: user.email, role: user.role });
-    return { user, accessToken: token };
+    const sessionId = `sess_${user.id}_${Date.now()}`;
+    const sessionToken = this.jwtService.sign({ sub: user.id, email: user.email, role: user.role, sessionId }, { expiresIn: '8h' });
+    return { user, accessToken: sessionToken, sessionToken, sessionId };
   }
 
   async verifyToken(token: string) {

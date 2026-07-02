@@ -14,7 +14,11 @@ async function bootstrap() {
     .setTitle('LMS Backend API')
     .setDescription('Swagger documentation for the LMS backend')
     .setVersion('1.0')
-    .addBearerAuth()
+    .addCookieAuth('sessionId', {
+      type: 'apiKey',
+      in: 'cookie',
+      name: 'sessionId',
+    })
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, documentFactory);

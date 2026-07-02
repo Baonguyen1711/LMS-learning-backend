@@ -9,7 +9,7 @@ This file documents every endpoint currently implemented in the backend so the f
 ## Authentication
 
 ### POST /api/auth/google
-Creates or retrieves a user from a Google sign-in payload.
+Creates or retrieves a user from a Google sign-in payload and sets session cookies.
 
 Request body:
 - role: admin | teacher | assistant-teacher | student
@@ -17,13 +17,18 @@ Request body:
 
 Response:
 - user
-- accessToken
+- sessionId
+
+Cookies set:
+- sessionId: httpOnly cookie containing the session identifier
+- role: httpOnly cookie containing the user role
 
 ### GET /api/auth/me
-Returns the authenticated user profile.
+Returns the authenticated user profile based on the session cookies.
 
-Headers:
-- Authorization: Bearer <token>
+Cookies required:
+- sessionId
+- role
 
 ## Admin endpoints
 

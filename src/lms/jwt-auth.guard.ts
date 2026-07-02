@@ -13,12 +13,12 @@ export class JwtAuthGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest<Request>();
-    const authHeader = request.headers.authorization;
-    if (!authHeader?.startsWith('Bearer ')) {
-      throw new UnauthorizedException('Missing bearer token');
+    const sessionToken = request.cookies?.sessionId;
+    if (!sessionToken) {
+      throw new UnauthorizedException('Missing session cookie');
     }
 
-    const payload = await this.authService.verifyToken(authHeader.slice(7));
+    const payload = await this.authService.verifyToken(sessionToken);
     request.user = payload;
     return true;
   }

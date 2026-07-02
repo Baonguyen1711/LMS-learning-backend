@@ -5,21 +5,26 @@ This document describes the backend endpoints available for the frontend.
 ## Authentication
 
 ### POST /api/auth/google
-Create or return a user from the Google sign-in flow.
+Create or return a user from the Google sign-in flow and set session cookies.
 
 Request body:
-- role: string
+- role: admin | teacher | assistant-teacher | student
 - profile: object containing email, name, picture, googleId
 
 Response:
 - user
-- accessToken
+- sessionId
+
+Cookies set:
+- sessionId: httpOnly cookie containing the session identifier
+- role: httpOnly cookie containing the user role
 
 ### GET /api/auth/me
-Returns the authenticated user profile.
+Returns the authenticated user profile from the session cookies.
 
-Headers:
-- Authorization: Bearer <token>
+Cookies required:
+- sessionId
+- role
 
 ## Users and roles
 
